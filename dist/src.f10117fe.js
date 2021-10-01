@@ -136888,13 +136888,19 @@ exports.red = "red";
 
 var User = function () {
   function User() {
-    this.color = 'red';
+    this.color = "red";
+    var name = faker_1.default.name,
+        _a = faker_1.default.address,
+        zipCode = _a.zipCode,
+        country = _a.country,
+        latitude = _a.latitude,
+        longitude = _a.longitude;
     this.name = faker_1.default.name.firstName();
-    this.address = faker_1.default.address.zipCode();
-    this.country = faker_1.default.address.country();
+    this.address = zipCode();
+    this.country = country();
     this.location = {
-      lat: parseFloat(faker_1.default.address.latitude()),
-      lng: parseFloat(faker_1.default.address.longitude())
+      lat: parseFloat(latitude()),
+      lng: parseFloat(longitude())
     };
   }
 
@@ -136924,12 +136930,25 @@ var faker_1 = __importDefault(require("faker"));
 
 var Company = function () {
   function Company() {
-    this.color = 'red';
-    this.companyName = faker_1.default.company.companyName();
-    this.catchPhrase = faker_1.default.company.catchPhrase();
+    this.color = "red"; //Todo destructure
+    // this.companyName = faker.company.companyName();
+    // this.catchPhrase = faker.company.catchPhrase();
+    // this.location = {
+    //   lat: parseFloat(faker.address.latitude()),
+    //   lng: parseFloat(faker.address.longitude())
+    // };
+
+    var _a = faker_1.default.address,
+        latitude = _a.latitude,
+        longitude = _a.longitude,
+        _b = faker_1.default.company,
+        companyName = _b.companyName,
+        catchPhrase = _b.catchPhrase;
+    this.companyName = companyName();
+    this.catchPhrase = catchPhrase();
     this.location = {
-      lat: parseFloat(faker_1.default.address.latitude()),
-      lng: parseFloat(faker_1.default.address.longitude())
+      lat: parseFloat(latitude()),
+      lng: parseFloat(longitude())
     };
   }
 
@@ -137028,7 +137047,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1053" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "28616" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

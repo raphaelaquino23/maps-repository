@@ -1,21 +1,32 @@
-import faker from 'faker';
+import faker, { address } from 'faker';
 import { Mappable } from './CustomMap';
 
-export class Company implements Mappable{
+export class Company implements Mappable {
   companyName: string;
   catchPhrase: string;
   location: {
     lat: number;
     lng: number;
   };
-  color: string = 'red';
+  color: string = "red";
 
   constructor() {
-    this.companyName = faker.company.companyName();
-    this.catchPhrase = faker.company.catchPhrase();
+    //Todo destructure
+    // this.companyName = faker.company.companyName();
+    // this.catchPhrase = faker.company.catchPhrase();
+    // this.location = {
+    //   lat: parseFloat(faker.address.latitude()),
+    //   lng: parseFloat(faker.address.longitude())
+    // };
+    const {
+      address: { latitude, longitude },
+      company: { companyName, catchPhrase },
+    } = faker;
+    this.companyName = companyName();
+    this.catchPhrase = catchPhrase();
     this.location = {
-      lat: parseFloat(faker.address.latitude()),
-      lng: parseFloat(faker.address.longitude())
+      lat: parseFloat(latitude()),
+      lng: parseFloat(longitude()),
     };
   }
 

@@ -1,9 +1,9 @@
 import faker from "faker";
-import { Mappable } from './CustomMap';
+import { Mappable } from "./CustomMap";
 
 export const red = "red";
 
-export class User implements Mappable{
+export class User implements Mappable {
   name: string;
   address: string;
   country: string;
@@ -11,15 +11,19 @@ export class User implements Mappable{
     lat: number;
     lng: number;
   };
-  color: string = 'red';
+  color: string = "red";
 
   constructor() {
-    this.name = faker.name.firstName();
-    this.address = faker.address.zipCode();
-    this.country = faker.address.country();
+    const {
+      name: {firstName}, //added firstName to destructure
+      address: { zipCode, country, latitude, longitude },
+    } = faker;
+    this.name = firstName();
+    this.address = zipCode();
+    this.country = country();
     this.location = {
-      lat: parseFloat(faker.address.latitude()),
-      lng: parseFloat(faker.address.longitude()),
+      lat: parseFloat(latitude()),
+      lng: parseFloat(longitude()),
     };
   }
 
